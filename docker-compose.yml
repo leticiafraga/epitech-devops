@@ -8,48 +8,63 @@ services:
       REDIS_HOST: 6379
     depends_on:
       - db
+    networks:
+      - poll-tier
   redis:
     image: "redis:7"
     expose:
       - "6379"
     depends_on:
       - db
+    networks:
+      - poll-tier
+      - back-tier
   worker:
     build: "./worker"
     environment:
       REDIS_HOST: redis
-      POSTGRES_HOST: host
+      POSTGRES_HOST: localhost
       POSTGRES_PORT: 5432
       POSTGRES_DB: name
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pwd
     depends_on:
       - db
+    networks:
+      - back-tier
   db:
     image: "postgres:16"
     restart: always
     volumes:
       - db-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_HOST: host
+      POSTGRES_HOST: localhost
       POSTGRES_PORT: 5432
       POSTGRES_DB: name
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pwd
-  # result:
-  #   build: "./result"
-  #   ports:
-  #     - "5001:80"
-  #   environment:
-  #     POSTGRES_HOST: host
-  #     POSTGRES_PORT: 5432
-  #     POSTGRES_DB: name
-  #     POSTGRES_USER: user
-  #     POSTGRES_PASSWORD: pwd
-  #   depends_on:
-  #     - db
+    networks:
+      - result-tier
+      - back-tier
+  result:
+    build: "./result"
+    ports:
+      - "5001:80"
+    environment:
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: name
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pwd
+    depends_on:
+      - db
+    networks:
+      - result-tier
 volumes:
   db-data:
-    
+networks:
+  poll-tier:
+  result-tier:
+  back-tier:
 
   
