@@ -7,6 +7,7 @@ RUN mvn package
 EXPOSE 80
 
 FROM eclipse-temurin:21-jre-alpine
-COPY . .
 
-CMD ["java" "-jar" "target/worker-jar-with-dependencies.jar"]
+COPY --from=builder . .
+
+CMD ["java", "-jar", "target/worker-jar-with-dependencies.jar"]

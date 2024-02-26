@@ -2,16 +2,18 @@ version: '3'
 services:
   poll:
     build: ./poll
+    restart: always
     ports:
       - "5000:80"
     environment:
-      REDIS_HOST: 6379
+      REDIS_HOST: redis
     depends_on:
       - db
     networks:
       - poll-tier
   redis:
     image: "redis:7"
+    restart: always
     expose:
       - "6379"
     depends_on:
@@ -21,9 +23,10 @@ services:
       - back-tier
   worker:
     build: "./worker"
+    restart: always
     environment:
       REDIS_HOST: redis
-      POSTGRES_HOST: localhost
+      POSTGRES_HOST: db
       POSTGRES_PORT: 5432
       POSTGRES_DB: name
       POSTGRES_USER: user
@@ -36,9 +39,10 @@ services:
     image: "postgres:16"
     restart: always
     volumes:
+      - /schema.sql:/docker-entrypoint-initdb.d/schema.sql
       - db-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_HOST: localhost
+      POSTGRES_HOST: db
       POSTGRES_PORT: 5432
       POSTGRES_DB: name
       POSTGRES_USER: user
@@ -48,10 +52,11 @@ services:
       - back-tier
   result:
     build: "./result"
+    restart: always
     ports:
       - "5001:80"
     environment:
-      POSTGRES_HOST: localhost
+      POSTGRES_HOST: db
       POSTGRES_PORT: 5432
       POSTGRES_DB: name
       POSTGRES_USER: user
