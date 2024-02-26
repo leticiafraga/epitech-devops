@@ -1,0 +1,55 @@
+version: '3'
+services:
+  poll:
+    build: ./poll
+    ports:
+      - "5000:80"
+    environment:
+      REDIS_HOST: 6379
+    depends_on:
+      - db
+  redis:
+    image: "redis:7"
+    expose:
+      - "6379"
+    depends_on:
+      - db
+  worker:
+    build: "./worker"
+    environment:
+      REDIS_HOST: redis
+      POSTGRES_HOST: host
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: name
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pwd
+    depends_on:
+      - db
+  db:
+    image: "postgres:16"
+    restart: always
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_HOST: host
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: name
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pwd
+  # result:
+  #   build: "./result"
+  #   ports:
+  #     - "5001:80"
+  #   environment:
+  #     POSTGRES_HOST: host
+  #     POSTGRES_PORT: 5432
+  #     POSTGRES_DB: name
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: pwd
+  #   depends_on:
+  #     - db
+volumes:
+  db-data:
+    
+
+  
