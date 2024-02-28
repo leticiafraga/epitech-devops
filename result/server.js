@@ -32,6 +32,7 @@ async.retry(
         callback(undefined, client);
       }).catch((err) => {
         console.error("Waiting for db", err);
+        callback(err, undefined);
       });
   },
   function(err, client) {
