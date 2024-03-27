@@ -1,1 +1,1 @@
-# bs-chocolatine yay
+# bs-chocolatine
