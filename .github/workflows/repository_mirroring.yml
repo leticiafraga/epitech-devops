@@ -27,9 +27,9 @@ jobs:
                     ${{ secrets.GIT_SSH_PRIVATE_KEY }}
     check_coding_style:
         if: github.repository != ${{ env.MIRROR_URL }}
+        container: ghcr.io/epitech/coding-style-checker:latest
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            #- uses: ghcr.io/epitech/coding-style-checker:latest
             - run: check.sh $(pwd) $(pwd)
                         
