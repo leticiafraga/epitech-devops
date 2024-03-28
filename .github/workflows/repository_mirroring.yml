@@ -1,12 +1,34 @@
-on: [push]
+name : chocolatine
+run-name: Running chocolatine
+
+on: 
+    pull_request:
+        branches-ignore:
+            - "ga-ignore-**"
+    push:
+        branches-ignore:
+            - "ga-ignore-**"
+
+env:
+    MIRROR_URL: "git@github.com:EpitechPromo2028/B-DOP-200-PAR-2-1-bschocolatine-leticia.fraga.git"
+    EXECUTABLES: "mysh"
+
 jobs:
-  mirror:
-    runs-on: ubuntu-latest
-    steps:
-        - uses: actions/checkout@v3
-        - uses: pixta-dev/repository-mirroring-action@v1
-          with:
-            target_repo_url:
-              git@github.com:EpitechPromo2028/B-DOP-200-PAR-2-1-bschocolatine-leticia.fraga.git
-            ssh_private_key:
-              ${{ secrets.GIT_SSH_PRIVATE_KEY }}
+    mirror:
+        if: github.repository != MIRROR_REPO
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pixta-dev/repository-mirroring-action@v1
+              with:
+                target_repo_url:
+                    ${{ env.MIRROR_REPO }}
+                ssh_private_key:
+                    ${{ secrets.GIT_SSH_PRIVATE_KEY }}
+    check_coding_style:
+        if: github.repository != MIRROR_REPO
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: ghcr.io/epitech/coding-style-checker:latest
+            run: check.sh $(pwd) $(pwd)
