@@ -52,6 +52,7 @@ jobs:
                             then
                                 echo "::error title=$exec::Missing $exec"
                                 exit 1
+                        fi
                         if [[ ! -x $exec ]]
                             then
                                 echo "::error title=$exec::$exec is not executable"
