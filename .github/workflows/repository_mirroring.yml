@@ -30,6 +30,7 @@ jobs:
     check_program_compilation:
         if: github.repository != 'EpitechPromo2028/B-DOP-200-PAR-2-1-bschocolatine-leticia.fraga'
         runs-on: ubuntu-latest
+        needs: check_coding_style
         steps:
             - uses: actions/checkout@v4
             - run: |
