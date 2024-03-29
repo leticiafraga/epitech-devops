@@ -34,7 +34,7 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - run: |
-                cat ${{ github }}
+                echo ${{ github.repositoryUrl }}
     # mirror:
     #     if: github.repository != '$MIRROR_URL'
     #     runs-on: ubuntu-latest
