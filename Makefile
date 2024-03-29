@@ -9,5 +9,7 @@ all:
 	gcc main.c -o a.out
 
 clean:
-
+  
 tests_run:
+
+

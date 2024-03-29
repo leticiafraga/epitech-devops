@@ -23,13 +23,13 @@ jobs:
             - run: check.sh $(pwd) $(pwd)
             - run: |
                 cat $(pwd)/coding-style-reports.log
-                if [[ -s $(pwd)/coding-style-reports.log ]]
+                if [ -s $(pwd)/coding-style-reports.log ]
                 then
                     IFS=$IFS:
                     while read line; do
                         infos=()
                         for i in $line; do infos+=($i) ; done
-                        echo "::error file=${infos[0]},line=${infos[1]},title=(${infos[2]} coding style error)::${infos[3]}"
+                        echo "::error file=${infos[0]},line=${infos[1]},title=${infos[2]} coding style error::${infos[3]}"
                     done < $(pwd)/coding-style-reports.log
                     exit 1
                 fi

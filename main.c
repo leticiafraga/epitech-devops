@@ -1,11 +1,5 @@
-/*
-** EPITECH PROJECT, 2024
-** Chocolatine
-** File description:
-** Chocolatine
-*/
 
-int main(void)
+int main( )
 {
     return 0;      
 }
