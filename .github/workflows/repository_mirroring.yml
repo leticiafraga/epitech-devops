@@ -29,12 +29,14 @@ jobs:
                 fi
     check_program_compilation:
         if: github.repository != '$MIRROR_URL'
-        container: ghcr.io/epitech/coding-style-checker:latest
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
             - run: |
-                echo ${{ github }}
+                echo ${{ github.repository }}
+                echo ${{ github.repository_id }}
+                echo ${{ github.repositoryUrl }}
+                echo ${{ github.action_repository }}
     # mirror:
     #     if: github.repository != '$MIRROR_URL'
     #     runs-on: ubuntu-latest
