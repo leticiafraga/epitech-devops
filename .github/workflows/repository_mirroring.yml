@@ -34,7 +34,7 @@ jobs:
             - run: |
                 check.sh $(pwd) $(pwd)
                 cat $(pwd)/coding-style-reports.log
-                if [[-s $(pwd)/coding-style-reports.log]]
+                if [[ -s $(pwd)/coding-style-reports.log ]]
                 then
                     exit 1
                 fi
