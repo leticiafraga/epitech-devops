@@ -25,7 +25,11 @@ jobs:
                 cat $(pwd)/coding-style-reports.log
                 if [[ -s $(pwd)/coding-style-reports.log ]]
                 then
-                    echo "::error file={name},line={line},endLine={endLine},title={title}::{message}"
+                    while read line; do
+                        echo "$line"
+                        infos = $(echo $line | tr ":" "\n")
+                        echo "::error file=$(infos[0]),line=$(infos[1]),title=$(infos[2])::$(infos[2])"
+                    done < $(pwd)/coding-style-reports.log
                     exit 1
                 fi
     check_program_compilation:
