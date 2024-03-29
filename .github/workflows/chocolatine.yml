@@ -25,6 +25,7 @@ jobs:
                 cat $(pwd)/coding-style-reports.log
                 if [[ -s $(pwd)/coding-style-reports.log ]]
                 then
+                    echo "::error file={name},line={line},endLine={endLine},title={title}::{message}"
                     exit 1
                 fi
     check_program_compilation:
