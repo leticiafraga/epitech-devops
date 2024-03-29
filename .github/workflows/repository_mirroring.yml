@@ -33,8 +33,9 @@ jobs:
         needs: check_coding_style
         steps:
             - uses: actions/checkout@v4
-            - run: |
-                echo ${{ github.repository }}
+            - run: make
+              timeout-minutes: 2
+            - run: make clean
     # mirror:
     #     if: github.repository != 'EpitechPromo2028/B-DOP-200-PAR-2-1-bschocolatine-leticia.fraga'
     #     runs-on: ubuntu-latest
