@@ -38,11 +38,11 @@ jobs:
               timeout-minutes: 2
             - run: make clean
             - run: |
-                arrEXEC=(${${{ env.EXECUTABLES }}//;/ })
-                for x in $EXECUTABLES
+                arrEXEC=$(echo ${{ env.EXECUTABLES }} | tr "," "\n")
+                for exec in $arrEXEC
                     do
-                        echo ${x}
-                        if ![[ -f $x ]]
+                        echo ${exec}
+                        if ![[ -f $exec ]]
                             then
                                 exit 1
                         fi
