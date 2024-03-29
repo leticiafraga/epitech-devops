@@ -1,6 +1,0 @@
-on: [push]
-jobs:
-  date:
-    runs-on: ubuntu-latest
-    steps:
-      - run: date
