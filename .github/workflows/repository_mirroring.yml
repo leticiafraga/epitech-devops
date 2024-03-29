@@ -10,12 +10,12 @@ on:
             - "ga-ignore-**"
 
 env:
-    MIRROR_URL: "git@github.com:leticiafraga/bs-chocolatine.git"
+    MIRROR_URL: "git@github.com:EpitechPromo2028/B-DOP-200-PAR-2-1-bschocolatine-leticia.fraga.git"
     EXECUTABLES: "mysh"
 
 jobs:
     check_coding_style:
-        if: github.repository != 'leticiafraga/bs-chocolatine'
+        if: github.repository != 'EpitechPromo2028/B-DOP-200-PAR-2-1-bschocolatine-leticia.fraga'
         container: ghcr.io/epitech/coding-style-checker:latest
         runs-on: ubuntu-latest
         steps:
@@ -28,14 +28,14 @@ jobs:
                     exit 1
                 fi
     check_program_compilation:
-        if: github.repository != 'leticiafraga/bs-chocolatine'
+        if: github.repository != 'EpitechPromo2028/B-DOP-200-PAR-2-1-bschocolatine-leticia.fraga'
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
             - run: |
                 echo ${{ github.repository }}
     # mirror:
-    #     if: github.repository != '$MIRROR_REPO'
+    #     if: github.repository != 'EpitechPromo2028/B-DOP-200-PAR-2-1-bschocolatine-leticia.fraga'
     #     runs-on: ubuntu-latest
     #     steps:
     #         - uses: actions/checkout@v4
