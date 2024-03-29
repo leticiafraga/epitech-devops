@@ -12,7 +12,7 @@ on:
 env:
     MIRROR_URL: "git@github.com:leticiafraga/bs-chocolatine.git"
     EXECUTABLES: "mysh"
-    MIRROR_REPO: "leticiafraga/bs-chocolatine.git"
+    MIRROR_REPO: "leticiafraga/bs-chocolatine"
 
 jobs:
     check_coding_style:
@@ -30,7 +30,6 @@ jobs:
                 fi
     check_program_compilation:
         if: github.repository != '$MIRROR_REPO'
-        container: ghcr.io/epitech/coding-style-checker:latest
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
