@@ -62,7 +62,7 @@ jobs:
         # needs: run_tests
         steps:
             - uses: actions/checkout@v4
-            - uses: pixta-dev/repository-m  irroring-action@v1
+            - uses: pixta-dev/repository-mirroring-action@v1
               with:
                 target_repo_url:
                     ${{ env.MIRROR_URL }}
