@@ -42,7 +42,7 @@ jobs:
                 for exec in $arrEXEC
                     do
                         echo ${exec}
-                        if ![[ -f $exec ]]
+                        if ![ -x $exec ]
                             then
                                 exit 1
                         fi
