@@ -34,8 +34,7 @@ jobs:
             - run: |
                 check.sh $(pwd) $(pwd)
                 cat $(pwd)/coding-style-reports.log
-                lines=$(cat $(pwd)/coding-style-reports.log | wc -l)
-                if (lines)
+                if [[-s $(pwd)/coding-style-reports.log]]
                 then
                     exit (1)
                 fi
