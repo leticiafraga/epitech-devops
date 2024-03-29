@@ -10,21 +10,10 @@ on:
             - "ga-ignore-**"
 
 env:
-    MIRROR_URL: "git@github.com:EpitechPromo2028/B-DOP-200-PAR-2-1-bschocolatine-leticia.fraga.git"
+    MIRROR_URL: "git@github.com:leticiafraga/bs-chocolatine.git"
     EXECUTABLES: "mysh"
 
 jobs:
-    mirror:
-        if: github.repository != '$MIRROR_URL'
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v4
-            - uses: pixta-dev/repository-mirroring-action@v1
-              with:
-                target_repo_url:
-                    ${{ env.MIRROR_URL }}
-                ssh_private_key:
-                    ${{ secrets.GIT_SSH_PRIVATE_KEY }}
     check_coding_style:
         if: github.repository != '$MIRROR_URL'
         container: ghcr.io/epitech/coding-style-checker:latest
@@ -38,4 +27,22 @@ jobs:
                 then
                     exit 1
                 fi
-                        
+    check_program_compilation:
+        if: github.repository != '$MIRROR_URL'
+        container: ghcr.io/epitech/coding-style-checker:latest
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - run: |
+                cat ${{ github }}
+    # mirror:
+    #     if: github.repository != '$MIRROR_URL'
+    #     runs-on: ubuntu-latest
+    #     steps:
+    #         - uses: actions/checkout@v4
+    #         - uses: pixta-dev/repository-mirroring-action@v1
+    #             with:
+    #             target_repo_url:
+    #                 ${{ env.MIRROR_URL }}
+    #             ssh_private_key:
+    #                 ${{ secrets.GIT_SSH_PRIVATE_KEY }}
