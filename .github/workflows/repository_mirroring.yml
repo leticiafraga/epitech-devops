@@ -31,6 +31,12 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - run: check.sh $(pwd) $(pwd)
-            - run: cat $(pwd)/coding-style-reports.log
+            - run: |
+                check.sh $(pwd) $(pwd)
+                cat $(pwd)/coding-style-reports.log
+                lines=$(cat $(pwd)/coding-style-reports.log | wc -l)
+                if (lines)
+                then
+                    exit (1)
+                fi
                         
