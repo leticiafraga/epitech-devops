@@ -19,7 +19,7 @@ jobs:
         steps:
             - if: ${{ github.repositoryUrl == env.MIRROR_URL}}
               run: |
-                echo "${${{ github.ref_name }}##*/}"
+                echo "${${{ env.MIRROR_URL }}#*:}"
                 exit 1
     check_coding_style:      
         needs: is_not_mirror
