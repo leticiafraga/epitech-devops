@@ -20,7 +20,7 @@ jobs:
         steps:
             - if: ${{ github.repository == env.MIRROR_NAME}}
               run: |
-                echo "${{ env.MIRROR_NAME }}"
+                echo "${{ env.MIRROR_NAME }} ${{ github.repository }}"
                 exit 1
     check_coding_style:      
         needs: is_not_mirror
