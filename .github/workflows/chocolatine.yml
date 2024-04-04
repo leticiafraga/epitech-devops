@@ -11,15 +11,16 @@ on:
 
 env:
     MIRROR_URL: "git@github.com:EpitechPromo2028/B-DOP-200-PAR-2-1-bschocolatine-leticia.fraga.git"
+    MIRROR_NAME: "EpitechPromo2028/B-DOP-200-PAR-2-1-bschocolatine-leticia.fraga"
     EXECUTABLES: "a.out"
 
 jobs:
     is_not_mirror:
         runs-on: ubuntu-latest
         steps:
-            - if: ${{ github.repositoryUrl == env.MIRROR_URL}}
+            - if: ${{ github.repository == env.MIRROR_NAME}}
               run: |
-                echo "${${{ env.MIRROR_URL }}#*:}"
+                echo "${{ env.MIRROR_NAME }}"
                 exit 1
     check_coding_style:      
         needs: is_not_mirror
