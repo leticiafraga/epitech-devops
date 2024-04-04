@@ -14,13 +14,15 @@ env:
     EXECUTABLES: "a.out"
 
 jobs:
-    is_mirror:
+    is_not_mirror:
         runs-on: ubuntu-latest
         steps:
             - if: ${{ github.repositoryUrl == env.MIRROR_URL}}
-              run: exit 1
+              run: |
+                echo "${${{ github.ref_name }}##*/}"
+                exit 1
     check_coding_style:      
-        needs: is_mirror
+        needs: is_not_mirror
         runs-on: ubuntu-latest
         container: ghcr.io/epitech/coding-style-checker:latest
         steps:
