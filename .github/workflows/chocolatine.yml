@@ -69,7 +69,7 @@ jobs:
             - run: make tests_run
               timeout-minutes: 2
     push_to_mirror:
-        if: github.repository != $env.MIRROR_URL  && github.event_name  == 'push'
+        if: 'github.repository != ${{ env.MIRROR_URL }}  && github.event_name  == "push"'
         runs-on: ubuntu-latest
         needs: run_tests
         steps:
