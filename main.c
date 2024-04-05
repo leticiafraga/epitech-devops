@@ -7,5 +7,7 @@
 
 int main(void)
 {
+    int test = 0;
+
     return 0;
 }
