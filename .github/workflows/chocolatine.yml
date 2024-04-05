@@ -18,16 +18,16 @@ jobs:
     is_not_mirror:
         runs-on: ubuntu-latest
         steps:
-            - if: ${{ github.repository == env.MIRROR_NAME}}
-              run: |
-                echo "${{ env.MIRROR_NAME }} ${{ github.repository }}"
-                exit 1
+            - name: 'Validate repo name'
+              if: ${{ github.repository == env.MIRROR_NAME}}
+              run: exit 1
     check_coding_style:      
         needs: is_not_mirror
         runs-on: ubuntu-latest
         container: ghcr.io/epitech/coding-style-checker:latest
         steps:
-            - uses: actions/checkout@v4
+            - name: 'Checkout'
+              uses: actions/checkout@v4
             - run: check.sh $(pwd) $(pwd)
             - run: |
                 cat $(pwd)/coding-style-reports.log
@@ -46,7 +46,8 @@ jobs:
         needs: check_coding_style
         container: epitechcontent/epitest-docker:latest
         steps:
-            - uses: actions/checkout@v4
+            - name: 'Checkout'
+              uses: actions/checkout@v4
             - run: make
               timeout-minutes: 2
             - run: make clean
@@ -71,7 +72,8 @@ jobs:
         needs: check_program_compilation
         container: epitechcontent/epitest-docker:latest
         steps:
-            - uses: actions/checkout@v4
+            - name: 'Checkout'
+              uses: actions/checkout@v4
             - run: make tests_run
               timeout-minutes: 2
     push_to_mirror:
@@ -79,8 +81,8 @@ jobs:
         runs-on: ubuntu-latest
         needs: run_tests
         steps:
-            - run: echo ${{ github.event_name }} ${{ github.repository }}
-            - uses: actions/checkout@v4
+            - name: 'Checkout'
+              uses: actions/checkout@v4
               with:  
                 fetch-depth: 0 
             - uses: pixta-dev/repository-mirroring-action@v1
