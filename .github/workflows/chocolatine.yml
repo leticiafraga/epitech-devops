@@ -32,7 +32,8 @@ jobs:
               uses: actions/checkout@v4
             - name: 'Run Coding Style'
               run: check.sh $(pwd) $(pwd)
-            - run: |
+            - name: 'Check Coding Style results'
+              run: |
                 cat $(pwd)/coding-style-reports.log
                 if [ -s $(pwd)/coding-style-reports.log ]
                 then
