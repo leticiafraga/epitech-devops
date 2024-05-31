@@ -1,4 +1,4 @@
-# Popeye
+# Chocolatine
 
 Docker and Docker Compose practical activity for a simple web poll application.
 - 3 Dockerfiles
